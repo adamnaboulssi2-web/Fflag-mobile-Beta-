@@ -8,7 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -21,8 +20,11 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Extract SaturnStraps
+      - name: Extract source
         run: unzip -o SaturnStraps-renamed-source.zip
+
+      - name: Configure Android SDK
+        run: echo "sdk.dir=$ANDROID_HOME" > saturn/local.properties
 
       - name: Build APK
         working-directory: saturn
